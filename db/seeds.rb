@@ -11,7 +11,7 @@ module Example::API
         email: 'gus@user',
         first_name: 'Gus',
         last_name: 'Mavromoustakos',
-        encrypted_password: Encryptor.digest('password')
+        encrypted_password: Encryptor.digest('password'),
       },
     ],
   }.deep_freeze

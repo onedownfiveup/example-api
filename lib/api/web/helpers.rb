@@ -2,9 +2,9 @@
 
 module Example::API
   module Web::Helpers
-    def with_authentication(&block)
+    def with_authentication(&_block)
       if warden.authenticated?
-        block.call
+        yield
       else
         status(:unauthorized)
       end
