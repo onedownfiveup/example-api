@@ -1,0 +1,16 @@
+---
+default: &default
+  adapter: postgres
+  host: <%= ENV['DATABASE_HOST'] || 'localhost' %>
+  user: <%= ENV['DATABASE_USER'] || 'postgres' %>
+  password: <%= ENV['DATABASE_PASSWORD'] || 'postgres' %>
+  retry_connect: true
+production:
+  <<: *default
+  database: <%= ENV['DATABASE_NAME'] || 'app_production' %>
+development:
+  <<: *default
+  database: <%= ENV['DATABASE_NAME'] || 'app_development' %>
+test:
+  <<: *default
+  database: <%= ENV['DATABASE_NAME'] || 'app_test' %>

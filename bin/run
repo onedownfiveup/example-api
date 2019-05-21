@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+case "$APP_ENV" in
+  "development" | "test")
+    shotgun --server webrick --host=0.0.0.0 --port="$HTTP_PORT" "$@"
+    ;;
+  "production")
+    rackup --server puma --host=0.0.0.0 --port="$HTTP_PORT" "$@"
+esac

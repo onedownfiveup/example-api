@@ -1,0 +1,27 @@
+version: '3'
+services:
+  app:
+    tty: true
+    stdin_open: true
+    build: .
+    command: bin/run
+    depends_on:
+      - db-sql
+    ports:
+      - "127.0.0.1:8000:8000"
+    expose:
+      - "8000"
+    environment:
+      APP_BASE_URL:
+      HTTP_PORT: 8000
+      APP_ENV: production
+      TOKEN_ALGO: ES256
+      TOKEN_KEY:
+    volumes:
+      - .:/app
+  db-sql:
+    image: postgres:9.6-alpine
+    volumes:
+      - db:/var/lib/postgresql/data
+volumes:
+  db:

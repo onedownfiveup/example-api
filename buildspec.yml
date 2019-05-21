@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - make ecr-login
+      - export BUILD_ID=$(echo $CODEBUILD_BUILD_ID | sed 's/^[^:]*://g')
+      - export APP_VERSION=$CODEBUILD_RESOLVED_SOURCE_VERSION.$BUILD_ID
+  build:
+    commands:
+      - make release
+      - make publish
+      - make version
+      - make version > version.json
+  post_build:
+    commands:
+      - make clean
+      - make logout
+
+artifacts:
+  files:
+    - version.json
